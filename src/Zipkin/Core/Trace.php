@@ -26,18 +26,20 @@ class Trace
     private $debug;
 
     /**
+     * @param Identifier|null $traceId
      * @param Tracer|null   $tracer
      * @param Endpoint|null $endpoint
      * @param float         $sampled
      * @param bool          $debug
      */
     public function __construct(
+        Identifier $traceId = null,
         Tracer $tracer = null,
         Endpoint $endpoint = null,
         $sampled = 1.0,
         $debug = false
     ) {
-        $this->traceId = Identifier::generate();
+        $this->traceId = empty($traceId) ? Identifier::generate() : $traceId;
         $this->sampled = $sampled;
         $this->debug   = $debug;
 
