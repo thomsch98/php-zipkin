@@ -28,6 +28,8 @@ class Tracer
 
         if ($sampled < 1.0) {
             $this->sampled = ($sampled == 0) ? false : ($sampled > (mt_rand() / mt_getrandmax()));
+        } else {
+            $this->sampled = $sampled;
         }
 
         $this->debug = $debug;
