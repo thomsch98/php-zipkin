@@ -47,7 +47,7 @@ class Trace
 
         if (empty($tracer)) {
             $client       = new Client();
-            $logger       = new HTTPLogger($client);
+            $logger       = new HTTPLogger($client, $baseUrl);
             $this->tracer = new Tracer($logger, $sampled, $debug);
         } else {
             $this->tracer = $tracer;
