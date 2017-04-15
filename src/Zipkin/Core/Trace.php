@@ -38,7 +38,7 @@ class Trace
         Endpoint $endpoint = null,
         $sampled = 1.0,
         $debug = false,
-        $baseUrl
+        $baseUrl = null
     ) {
         $this->traceId = $traceId ?: Identifier::generate();
         $this->endpoint = $endpoint;
