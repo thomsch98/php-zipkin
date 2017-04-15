@@ -66,7 +66,7 @@ class Span
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -74,7 +74,7 @@ class Span
     /**
      * @return Identifier
      */
-    public function getTraceId(): Identifier
+    public function getTraceId()
     {
         return $this->traceId;
     }
@@ -82,7 +82,7 @@ class Span
     /**
      * @return Identifier
      */
-    public function getSpanId(): Identifier
+    public function getSpanId()
     {
         return $this->spanId;
     }
@@ -98,7 +98,7 @@ class Span
     /**
      * @return Annotation[]
      */
-    public function getAnnotations(): array
+    public function getAnnotations()
     {
         return $this->annotations;
     }
@@ -106,7 +106,7 @@ class Span
     /**
      * @return BinaryAnnotation[]
      */
-    public function getBinaryAnnotations(): array
+    public function getBinaryAnnotations()
     {
         return $this->binaryAnnotations;
     }
@@ -114,9 +114,17 @@ class Span
     /**
      * @return bool
      */
-    public function getDebug(): bool
+    public function getDebug()
     {
         return $this->debug;
+    }
+
+    /**
+     * @param int $timestamp
+     */
+    public function setTimestamp($timestamp)
+    {
+        $this->timestamp = $timestamp;
     }
 
     /**
@@ -133,6 +141,14 @@ class Span
     public function getDuration()
     {
         return $this->duration;
+    }
+
+    /**
+     * @param int $duration
+     */
+    public function setDuration($duration)
+    {
+        $this->duration = $duration;
     }
 
     /**
@@ -154,18 +170,18 @@ class Span
     /**
      * @return array
      */
-    public function toArray(): array
+    public function toArray()
     {
         $parentSpanId = (string)$this->getParentSpanId();
 
         return [
             'id'                => (string)$this->getSpanId(),
-            'name'              => $this->getName(),
+            'name'              => (string)$this->getName(),
             'traceId'           => (string)$this->getTraceId(),
-            'parentId'          => (empty($parentSpanId)) ? null : $parentSpanId,
-            'timestamp'         => $this->getTimestamp(),
-            'duration'          => $this->getDuration(),
-            'debug'             => $this->getDebug(),
+            'parentId'          => (empty($parentSpanId)) ? null : (string)$parentSpanId,
+            'timestamp'         => (int)$this->getTimestamp(),
+            'duration'          => (int)$this->getDuration(),
+            'debug'             => (boolean)$this->getDebug(),
             'annotations'       => array_map([$this, 'annotationToArray'], $this->getAnnotations()),
             'binaryAnnotations' => array_map([$this, 'binaryAnnotationToArray'], $this->getBinaryAnnotations()),
         ];
@@ -175,7 +191,7 @@ class Span
      * @param Annotation $annotation
      * @return array
      */
-    public function annotationToArray(Annotation $annotation): array
+    public function annotationToArray(Annotation $annotation)
     {
         return $annotation->toArray();
     }
@@ -184,7 +200,7 @@ class Span
      * @param BinaryAnnotation $binaryAnnotation
      * @return array
      */
-    public function binaryAnnotationToArray(BinaryAnnotation $binaryAnnotation): array
+    public function binaryAnnotationToArray(BinaryAnnotation $binaryAnnotation)
     {
         return $binaryAnnotation->toArray();
     }

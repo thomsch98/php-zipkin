@@ -32,7 +32,7 @@ class Endpoint
     /**
      * @return string
      */
-    public function getIpv4(): string
+    public function getIpv4()
     {
         return $this->ipv4;
     }
@@ -40,7 +40,7 @@ class Endpoint
     /**
      * @return int
      */
-    public function getPort(): int
+    public function getPort()
     {
         return $this->port;
     }
@@ -48,7 +48,7 @@ class Endpoint
     /**
      * @return string
      */
-    public function getServiceName(): string
+    public function getServiceName()
     {
         return $this->serviceName;
     }
@@ -64,22 +64,22 @@ class Endpoint
     /**
      * @return array
      */
-    public function toArray(): array
+    public function toArray()
     {
         $data = [
-            'serviceName' => $this->getServiceName(),
+            'serviceName' => (string)$this->getServiceName(),
         ];
 
         if (!empty($this->getIpv4())) {
-            $data['ipv4'] = $this->getIpv4();
+            $data['ipv4'] = (string)$this->getIpv4();
         }
 
         if (!empty($this->getPort())) {
-            $data['port'] = $this->getPort();
+            $data['port'] = (int)$this->getPort();
         }
 
         if (!empty($this->getIpv6())) {
-            $data['ipv6'] = $this->getIpv6();
+            $data['ipv6'] = (string)$this->getIpv6();
         }
 
         return $data;

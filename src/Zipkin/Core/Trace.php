@@ -37,9 +37,11 @@ class Trace
         Tracer $tracer = null,
         Endpoint $endpoint = null,
         $sampled = 1.0,
-        $debug = false
+        $debug = false,
+        $baseUrl
     ) {
-        $this->traceId = empty($traceId) ? Identifier::generate() : $traceId;
+        $this->traceId = $traceId ?: Identifier::generate();
+        $this->endpoint = $endpoint;
         $this->sampled = $sampled;
         $this->debug   = $debug;
 
@@ -51,7 +53,6 @@ class Trace
             $this->tracer = $tracer;
         }
 
-        $this->endpoint = $endpoint;
     }
 
     public function createNewSpan(
@@ -104,7 +105,7 @@ class Trace
     /**
      * @return Identifier
      */
-    public function getTraceId(): Identifier
+    public function getTraceId()
     {
         return $this->traceId;
     }
@@ -112,7 +113,7 @@ class Trace
     /**
      * @return Span[]
      */
-    public function getSpans(): array
+    public function getSpans()
     {
         return $this->spans;
     }
@@ -120,7 +121,7 @@ class Trace
     /**
      * @return Span
      */
-    public function popSpan(): Span
+    public function popSpan()
     {
         return array_pop($this->spans);
     }
