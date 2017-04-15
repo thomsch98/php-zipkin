@@ -3,11 +3,11 @@ namespace Drefined\Zipkin\Core;
 
 class Identifier
 {
-    /** @var int $id */
+    /** @var string $id */
     private $id;
 
     /**
-     * @param int $id
+     * @param string $id
      */
     public function __construct($id)
     {
@@ -19,7 +19,7 @@ class Identifier
      */
     public function __toString()
     {
-        return (string)$this->id;
+        return $this->id;
     }
 
     /**
