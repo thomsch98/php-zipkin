@@ -27,10 +27,11 @@ class Trace
 
     /**
      * @param Identifier|null $traceId
-     * @param Tracer|null   $tracer
+     * @param Tracer|null $tracer
      * @param Endpoint|null $endpoint
-     * @param float         $sampled
-     * @param bool          $debug
+     * @param float $sampled
+     * @param bool $debug
+     * @param null $baseUrl
      */
     public function __construct(
         Identifier $traceId = null,
